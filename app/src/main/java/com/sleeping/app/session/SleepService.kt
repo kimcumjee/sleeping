@@ -80,7 +80,7 @@ class SleepService : LifecycleService() {
         SleepSession.set(SleepPhase.Preparing)
 
         sessionJob = lifecycleScope.launch {
-            // 1) 안전 확인: 기어 P (+ 읽을 수 있으면 주차 브레이크)
+            // 1) 안전 확인: 기어 P
             val parkState = withTimeoutOrNull(PARK_CHECK_TIMEOUT_MS) {
                 parking.state.filter { it.inPark != null }.first()
             }

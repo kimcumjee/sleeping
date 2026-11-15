@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
-    // 시작 화면의 상태 표시(기어·주차 브레이크·잔량)용. 수면 세션 자체는 SleepService가 담당한다.
+    // 시작 화면의 상태 표시(기어·잔량)용. 수면 세션 자체는 SleepService가 담당한다.
     private lateinit var vehicle: VehicleController
     private lateinit var parking: ParkingMonitor
     private val energy = MutableStateFlow<Int?>(null)

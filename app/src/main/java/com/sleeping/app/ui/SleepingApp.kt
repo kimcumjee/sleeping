@@ -16,12 +16,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
@@ -32,7 +29,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sleeping.app.DebugFlags
 import com.sleeping.app.SleepConfig
 import com.sleeping.app.session.SleepPhase
 import com.sleeping.app.session.WakeReason
@@ -72,9 +68,7 @@ private fun HomeScreen(
     onStart: () -> Unit,
 ) {
     val lowEnergy = energyPercent != null && energyPercent <= SleepConfig.LOW_ENERGY_PERCENT
-    val skipBrake by DebugFlags.skipParkingBrake.collectAsState()
-    val skipBrakeActive = DebugFlags.available && skipBrake
-    val canStart = parking.canSleep(skipBrakeActive) && !lowEnergy
+    val canStart = parking.canSleep && !lowEnergy
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -93,14 +87,6 @@ private fun HomeScreen(
             StatusChip(
                 label = "기어 P",
                 state = when (parking.inPark) {
-                    true -> ChipState.Ok
-                    false -> ChipState.Bad
-                    null -> ChipState.Unknown
-                },
-            )
-            StatusChip(
-                label = "주차 브레이크",
-                state = when (parking.parkingBrakeOn) {
                     true -> ChipState.Ok
                     false -> ChipState.Bad
                     null -> ChipState.Unknown
@@ -131,7 +117,6 @@ private fun HomeScreen(
             when {
                 lowEnergy -> "배터리나 연료가 ${SleepConfig.LOW_ENERGY_PERCENT}% 이하라 시작할 수 없어요"
                 parking.inPark == false -> "기어를 P에 두면 시작할 수 있어요"
-                parking.parkingBrakeOn == false && !skipBrakeActive -> "주차 브레이크를 걸면 시작할 수 있어요"
                 parking.inPark == null -> "차량 상태를 확인하고 있어요"
                 else -> "시트를 눕히고, 조명을 낮추고, 화이트 노이즈를 틀어 드려요"
             },
@@ -139,19 +124,6 @@ private fun HomeScreen(
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
         )
-
-        if (DebugFlags.available) {
-            Spacer(Modifier.height(24.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("[개발용] 주차 브레이크 확인 건너뛰기", color = SleepColors.InkMuted, fontSize = 14.sp)
-                Spacer(Modifier.size(12.dp))
-                Switch(
-                    checked = skipBrake,
-                    onCheckedChange = { DebugFlags.skipParkingBrake.value = it },
-                    colors = SwitchDefaults.colors(checkedTrackColor = SleepColors.Warm),
-                )
-            }
-        }
 
         phase.message?.let {
             Spacer(Modifier.height(28.dp))

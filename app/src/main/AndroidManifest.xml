@@ -20,7 +20,7 @@
     <!-- Pleos TextToSpeech SDK -->
     <uses-permission android:name="pleos.car.permission.TTS_SERVICE" />
 
-    <!-- AAOS: 기어·주차 브레이크 (GEAR_SELECTION, PARKING_BRAKE_ON) -->
+    <!-- AAOS: 기어 (GEAR_SELECTION) -->
     <uses-permission android:name="android.car.permission.CAR_POWERTRAIN" />
 
     <!-- 수면 세션 포그라운드 서비스 (화이트 노이즈 재생) -->

@@ -8,7 +8,7 @@
     <string name="notif_waking">일어날 시간이에요</string>
     <string name="action_wake_now">지금 일어나기</string>
 
-    <string name="msg_not_parked">기어를 P에 두고 주차 브레이크를 건 뒤 시작해 주세요.</string>
+    <string name="msg_not_parked">기어를 P에 두고 시작해 주세요.</string>
     <string name="msg_low_energy_start">잔량이 %1$d%%라 수면 모드를 시작하지 않았어요.</string>
     <string name="msg_done">잘 쉬셨어요. 설정을 원래대로 돌려 두었어요.</string>
     <string name="msg_woke_low_energy">배터리나 연료가 부족해 일찍 깨워 드렸어요.</string>
