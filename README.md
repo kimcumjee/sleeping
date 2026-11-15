@@ -7,7 +7,7 @@
 1. Pleos Connect Emulator를 실행합니다.
 2. APK를 설치합니다.
    ```bash
-   adb install -r "apk/_슬리핑_release.apk"
+   adb install -r "apk/졸음쉼표_슬리핑_release.apk"
    ```
 3. 앱 목록에서 **슬리핑**을 실행합니다.
 4. 기어 P 상태에서 **15분 수면 시작**을 누릅니다.
@@ -24,4 +24,4 @@
 
 ## APK
 
-[`apk/_슬리핑_release.apk`](apk/_슬리핑_release.apk)
+[`apk/졸음쉼표_슬리핑_release.apk`](apk/졸음쉼표_슬리핑_release.apk)
